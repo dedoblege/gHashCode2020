@@ -1,0 +1,19 @@
+NOTES PIZZA EXAMPLE
+-------------------
+
+1 pizza/type 
+size = nº of slices
+as many slices as possible
+<=maximum number
+
+----------------------------------------------
+data in==
+M(max slices) N(number of types) 
+N1 N2 N3 (nº slices / type from 1 to n)
+----------------------------------------------
+----------------------------------------------
+data out==
+K(number types)
+K1 K2 K3 (which types)
+----------------------------------------------
+K1 + K2 + K3 <= M
