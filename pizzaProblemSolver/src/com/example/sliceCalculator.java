@@ -1,48 +1,44 @@
 package com.example;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class sliceCalculator {
     public static void main(String [] args) throws IOException {
 
-
-        //TODO Read file a_example
-
-       
-
-        //TODO convert string to int
-
-        int maxSlices = 100;
-        int numberOfTypes = 10;
-        int[] inSlices = {4, 14, 15, 18, 29, 32, 36, 82, 95, 95};
-
-//        int maxSlices = 17;
-//        int numberOfTypes = 4;
-//        int [] inSlices = {2,5,6,8};
-//        ArrayList<Integer> inSlices = new ArrayList<Integer>(numberOfTypes);
-//        inSlices.add(2);
-//        inSlices.add(5);
-//        inSlices.add(6);
-//        inSlices.add(8);
-
-        int resultNumberOfTypes = 0;
-
+        //Initialisation
+        int maxSlices = 0;
+        int numberOfTypes = 0;
         int actualMaxForThisR;
         int actualMax;
+        int[] inSlices = {};
         ArrayList<Integer> actualCombiForThisR = new ArrayList<>();
         ArrayList<Integer> actualCombi = new ArrayList<>();
-
         ArrayList<ArrayList<Integer>> combinationsForR = new ArrayList<>();
+        String solution;
 
-        int maxSlicesToGet = maxSlices;
-        int totalNumberOfSlices = 0;
+        //Reading file
+        String path = "C:\\Users\\dedob\\Documents\\GoogleHashCode\\gHashCode2020\\pizzaExampleStatement\\a_example.txt";
+        String[] myFile = readMyFile(path);
 
+        //Data to variables conversion
+        String[] line0 = myFile[0].split(" ");
+        maxSlices = Integer.valueOf(line0[0]);
+        numberOfTypes = Integer.valueOf(line0[1]);
+
+        String[] line1 = myFile[1].split(" ");
+
+        inSlices = new int[line1.length];
+        for(int i = 0; i<line1.length;i++){
+            inSlices[i] = Integer.parseInt(line1[i]);
+        }
+
+        //Calculation
         actualMax = 0;
-        for(int r=0;r<numberOfTypes;r++) {
+
+        for(int r=1;r<numberOfTypes;r++) {
             actualMaxForThisR = 0;
             actualCombiForThisR.clear();
 
@@ -56,7 +52,7 @@ public class sliceCalculator {
                     actualCombiForThisR.addAll(eachCombi);
                 }
             }
-            System.out.println("best combi for this r(" + r +") : " + actualCombiForThisR);
+            System.out.println("Best combi for this r(" + r +") : " + actualCombiForThisR);
 
             if(r==0){
                 actualMax = actualMaxForThisR;
@@ -72,9 +68,18 @@ public class sliceCalculator {
 
         }
 
-        System.out.println("final decision : " + actualCombi);
+        //Prepare data to save in file
+        solution = String.valueOf(actualCombi.size()) + "\n";
 
-            //TODO write result in file
+        for(Integer element:actualCombi){
+            solution += String.valueOf(element) + " ";
+        }
+
+
+        //TODO Write solution in output file
+        System.out.println("final decision : " + actualCombi);
+        System.out.println("solution : " + solution);
+
 
     }
 
@@ -140,6 +145,29 @@ public class sliceCalculator {
         return sum;
     }
 
+    static String[] readMyFile(String path) throws FileNotFoundException {
+        File file = new File(path);
+        Scanner sc = new Scanner(file);
+
+        // we just need to use \\Z as delimiter
+        sc.useDelimiter("\\Z");
+
+        String fileContent = sc.next().toString();
+        System.out.println("fileContent : "+fileContent);
+
+        String[] line = fileContent.split("\n");
+        return line;
+
+//        System.out.println("line " + line);
+//        for(int i=0;i<line.length;i++) {
+//            System.out.println("line "+ i + " : " + line[i]);
+//            String[] valueOfLine = line[i].split(" ");
+//            for (int j = 0; j < valueOfLine.length; j++) {
+//                System.out.println("value " + j + " : " + valueOfLine[j]);
+//
+//            }
+//        }
+    }
 
 
 }
