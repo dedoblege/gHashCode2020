@@ -9,6 +9,8 @@ public class sliceCalculator {
     public static void main(String [] args) throws IOException {
 
         //Initialisation
+        String inputPath = "C:\\Users\\dedob\\Documents\\GoogleHashCode\\gHashCode2020\\pizzaExampleStatement\\a_example.txt";
+        String outputPath = "C:\\Users\\dedob\\Documents\\GoogleHashCode\\gHashCode2020\\pizzaExampleStatement\\a_solution.txt";
         int maxSlices = 0;
         int numberOfTypes = 0;
         int actualMaxForThisR;
@@ -20,8 +22,7 @@ public class sliceCalculator {
         String solution;
 
         //Reading file
-        String path = "C:\\Users\\dedob\\Documents\\GoogleHashCode\\gHashCode2020\\pizzaExampleStatement\\a_example.txt";
-        String[] myFile = readMyFile(path);
+        String[] myFile = readMyFile(inputPath);
 
         //Data to variables conversion
         String[] line0 = myFile[0].split(" ");
@@ -75,12 +76,9 @@ public class sliceCalculator {
             solution += String.valueOf(element) + " ";
         }
 
-
-        //TODO Write solution in output file
-        System.out.println("final decision : " + actualCombi);
+        //Write solution in output file
         System.out.println("solution : " + solution);
-
-
+        writeMySolution(solution, outputPath);
     }
 
     /*  https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
@@ -167,6 +165,20 @@ public class sliceCalculator {
 //
 //            }
 //        }
+    }
+
+    static void writeMySolution(String wrString, String path) throws IOException {
+        // attach a file to FileWriter
+        FileWriter fw = new FileWriter(path);
+
+        // read character wise from string and write
+        // into FileWriter
+        for (int i = 0; i < wrString.length(); i++)
+            fw.write(wrString.charAt(i));
+
+        System.out.println("Writing successful");
+        //close the file
+        fw.close();
     }
 
 
